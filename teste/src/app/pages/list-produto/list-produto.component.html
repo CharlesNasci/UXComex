@@ -1,0 +1,116 @@
+<div>
+  <div class="header">
+    <p>Produtos</p>
+  </div>
+  <div class="body">
+    <div class="search">
+      <div class="search-options">
+        <label>
+          <input
+            type="radio"
+            name="searchType"
+            [value]="0"
+            (click)="LimparBusca()"
+            checked
+          />
+          Nome
+        </label>
+      </div>
+      <input
+        type="text"
+        placeholder="Pesquisar Produto"
+        (keyup.enter)="Search()"
+        [(ngModel)]="searchProduto"
+        (click)="LimparBusca()"
+        name="search"
+      />
+      <button type="button" (click)="Search()">
+        <span> Pesquisar </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="produtos-table-container">
+    <ng-container *ngIf="listProdutos.length > 0">
+      <table class="produtos-table">
+        <thead>
+          <tr>
+            <th>Remover</th>
+            <th>Editar</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade em estoque</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let produto of listProdutos"
+            (click)="SelecionarProduto(produto)"
+          >
+            <td class="acoes">
+              <button
+                type="button"
+                class="btn-acao editar"
+                (click)="EditarProduto(produto)"
+                aria-label="Editar"
+              >
+                <span class="material-icons">edit</span>
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn-acao remover"
+                (click)="DeleteProduto(produto.id)"
+                aria-label="Remover"
+              >
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.descricao }}</td>
+            <td>R$ {{ produto.preco | number : "1.2-2" }}</td>
+            <td>{{ produto.qtdeEstoque }}</td>
+          </tr>
+        </tbody>
+        <!-- MODAL PRODUTO -->
+        <div class="modal-backdrop" *ngIf="produtoSelecionado">
+          <div class="modal-card">
+            <button
+              class="close-btn"
+              (click)="produtoSelecionado = null"
+              aria-label="Fechar"
+            >
+              &times;
+            </button>
+            <h2>🛒 Detalhes do Produto</h2>
+            <div class="modal-body">
+              <p><strong>Nome:</strong> {{ produtoSelecionado.nome }}</p>
+              <p>
+                <strong>Descrição:</strong> {{ produtoSelecionado.descricao }}
+              </p>
+              <p>
+                <strong>Preço:</strong> R$
+                {{ produtoSelecionado.preco | number : "1.2-2" }}
+              </p>
+              <p>
+                <strong>Quantidade em estoque:</strong>
+                {{ produtoSelecionado.qtdeEstoque }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </table>
+    </ng-container>
+    <div *ngIf="listProdutos.length == 0" class="sem-produtos">
+      Nenhum produto cadastrado.
+    </div>
+  </div>
+
+  <div class="footer">
+    <button type="button" (click)="NovoProduto()">
+      <span> Novo produto </span>
+    </button>
+  </div>
+</div>

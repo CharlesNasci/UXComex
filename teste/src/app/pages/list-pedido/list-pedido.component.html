@@ -1,0 +1,40 @@
+<div>
+  <div class="header">
+    <p>Pedido de Pedidos</p>
+  </div>
+  <div class="body">
+    <div class="search">
+      <input type="text" placeholder="Pesquisar Pedido" />
+      <button class="default" type="button" (click)="Search()">
+        <span> Pesquisar </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="pedidos-table-container">
+    <ng-container *ngIf="listPedido.length > 0">
+      <table class="pedidos-table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Data do pedido</th>
+            <th>Valor Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of listPedido"></tr>
+        </tbody>
+      </table>
+    </ng-container>
+    <div *ngIf="listPedido.length == 0" class="sem-pedidos">
+      Nenhum pedido cadastrado.
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="default" type="button" (click)="NovoPedido()">
+      <span> Novo Pedido </span>
+    </button>
+  </div>
+</div>

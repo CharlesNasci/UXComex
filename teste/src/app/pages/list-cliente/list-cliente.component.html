@@ -1,0 +1,127 @@
+<div>
+  <div class="header">
+    <p>Clientes</p>
+  </div>
+  <div class="body">
+    <div class="search">
+      <div class="search-options">
+        <label>
+          <input
+            type="radio"
+            name="searchType"
+            [(ngModel)]="searchType"
+            [value]="0"
+            (click)="LimparBusca()"
+            checked
+          />
+          Nome
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="searchType"
+            [(ngModel)]="searchType"
+            [value]="1"
+            (click)="LimparBusca()"
+          />
+          Email
+        </label>
+      </div>
+      <input
+        type="text"
+        placeholder="Pesquisar cliente"
+        (keyup.enter)="Search()"
+        [(ngModel)]="searchCliente"
+        (click)="LimparBusca()"
+        name="search"
+      />
+      <button type="button" (click)="Search()">
+        <span> Pesquisar </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="clientes-table-container">
+    <ng-container *ngIf="listClientes.length > 0">
+      <table class="clientes-table">
+        <thead>
+          <tr>
+            <th>Remover</th>
+            <th>Editar</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Data de Cadastro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let cliente of listClientes"
+            (click)="SelecionarCliente(cliente)"
+          >
+            <td class="acoes">
+              <button
+                type="button"
+                class="btn-acao remover"
+                (click)="DeleteCliente(cliente.id); $event.stopPropagation()"
+                aria-label="Remover"
+              >
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                class="btn-acao editar"
+                (click)="EditarCliente(cliente); $event.stopPropagation()"
+                aria-label="Editar"
+              >
+                <span class="material-icons">edit</span>
+              </button>
+            </td>
+
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.telefone }}</td>
+            <td>{{ cliente.dataCadastro | date : "dd/MM/yyyy" }}</td>
+          </tr>
+        </tbody>
+
+        <div class="modal-backdrop" *ngIf="clienteSelecionado">
+          <div class="modal-card">
+            <button
+              class="close-btn"
+              (click)="clienteSelecionado = null"
+              aria-label="Fechar"
+            >
+              &times;
+            </button>
+            <h2>👨Detalhes do Cliente</h2>
+            <div class="modal-body">
+              <p><strong>Nome:</strong> {{ clienteSelecionado.nome }}</p>
+              <p><strong>Email:</strong> {{ clienteSelecionado.email }}</p>
+              <p>
+                <strong>Telefone:</strong> R$
+                {{ clienteSelecionado.telefone }}
+              </p>
+              <p>
+                <strong>Data de Cadastro:</strong>
+                {{ clienteSelecionado.dataCadastro | date : "dd/MM/yyyy" }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </table>
+    </ng-container>
+    <div *ngIf="listClientes.length == 0" class="sem-clientes">
+      Nenhum cliente cadastrado.
+    </div>
+  </div>
+
+  <div class="footer">
+    <button type="button" (click)="NovoCliente()">
+      <span> Novo Cliente </span>
+    </button>
+  </div>
+</div>

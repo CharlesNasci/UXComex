@@ -1,0 +1,222 @@
+.pedido-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.07);
+  padding: 32px 24px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.pedido-container h2 {
+  color: #6366f1;
+  margin-bottom: 18px;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+select,
+input[type="number"],
+input[type="text"],
+textarea {
+  padding: 10px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f7fafc;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  resize: none;
+}
+
+select:focus,
+input[type="number"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #6366f133;
+}
+
+.produtos-section {
+  margin: 18px 0;
+}
+
+.produto-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.produto-item select,
+.produto-item input[type="number"] {
+  min-width: 120px;
+}
+
+.produto-item button {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.produto-item button:hover {
+  background: #fee2e2;
+}
+
+.total-section {
+  margin: 18px 0;
+  font-weight: 600;
+  color: #374151;
+  font-size: 1.1rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+button[type="submit"],
+.produtos-section > button[type="button"] {
+  margin-top: 10px;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.13);
+  transition: background 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover,
+.produtos-section > button[type="button"]:hover {
+  background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+@media (max-width: 700px) {
+  .pedido-container {
+    max-width: 98vw;
+    padding: 18px 8px;
+  }
+  .produto-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+}
+.produtos-table-container {
+  margin: 32px auto 0 auto;
+  max-width: 700px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.07);
+  padding: 18px 0 8px 0;
+}
+
+.produtos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.produtos-table th,
+.produtos-table td {
+  padding: 12px 18px;
+  text-align: left;
+}
+
+/* ...existing code... */
+
+.produtos-table th {
+  background: #f7fafc;
+  color: #4b5563;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  font-size: 1rem;
+  border-bottom: 1.5px solid #e5e7eb;
+  text-transform: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* ...existing code... */
+
+.produtos-table tr:nth-child(even) {
+  background: #f7fafc;
+}
+
+.produtos-table tr:hover {
+  background: #e0e7ff;
+  transition: background 0.2s;
+}
+
+.sem-pedidos {
+  text-align: center;
+  color: #6366f1;
+  padding: 24px 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 800px) {
+  .produtos-table-container {
+    max-width: 98vw;
+    padding: 8px 0;
+  }
+  .produtos-table th,
+  .produtos-table td {
+    padding: 8px 6px;
+    font-size: 0.95rem;
+  }
+}
+.voltar-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+.btn-voltar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #6366f1;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: background 0.15s;
+  border-radius: 6px;
+}
+
+.btn-voltar:hover {
+  background: #f1f5ff;
+}

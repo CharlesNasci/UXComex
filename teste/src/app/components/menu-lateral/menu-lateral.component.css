@@ -1,0 +1,20 @@
+mat-nav-list{
+  padding-top: 40px;
+}
+
+.item{
+  margin: 0 0 0 15px;
+}
+
+mat-card-title, mat-card-content{
+  text-align: center;
+  font-size: 21px;
+}
+
+mat-icon{
+      margin-top: 8px;
+}
+
+.item{
+  margin: 10px 30px;
+}

@@ -1,0 +1,107 @@
+<div class="voltar-container">
+  <button
+    type="button"
+    class="btn-voltar"
+    (click)="VoltarParaLista()"
+    aria-label="Voltar para lista"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M15 19l-7-7 7-7"
+        stroke="#6366f1"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <span>Voltar</span>
+  </button>
+</div>
+<div class="pedido-container">
+  <h2>Novo Pedido</h2>
+  <form (ngSubmit)="salvarPedido()">
+    <!-- Selecionar Cliente -->
+    <div>
+      <label for="cliente">Cliente:</label>
+      <select
+        id="cliente"
+        [(ngModel)]="pedido.idCliente"
+        name="cliente"
+        required
+      >
+        <option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{ cliente.nome }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Produtos adicionados ao pedido -->
+    <div class="produtos-section">
+      <label>Produtos do Pedido:</label>
+      <table class="produtos-table" *ngIf="pedido.itens.length > 0">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Qtd</th>
+            <th>Preço Unitário</th>
+            <th>Total</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="pedido.itens.length > 0">
+            <tr *ngFor="let item of pedido?.itens; let i = index">
+              <td>{{ getNomeProduto(item) }}</td>
+              <td>
+                <input
+                  type="number"
+                  min="1"
+                  [max]="getEstoqueDisponivel(item)"
+                  [(ngModel)]="item.quantidade"
+                  name="quantidade{{ i }}"
+                  required
+                />
+              </td>
+              <td>R$ {{ item.precoUnitario | number : "1.2-2" }}</td>
+              <td>
+                R$ {{ item.precoUnitario * item.quantidade | number : "1.2-2" }}
+              </td>
+              <td>
+                <button type="button" (click)="removerItem(i)">Remover</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div *ngIf="pedido.itens.length === 0" class="sem-produtos">
+        Nenhum produto adicionado.
+      </div>
+      <button type="button" (click)="abrirSelecionarProduto()">
+        Adicionar Produto
+      </button>
+    </div>
+
+    <div class="total-section">
+      <label>Valor Total:</label>
+      <span>R$ {{ calcularTotal() | number : "1.2-2" }}</span>
+    </div>
+
+    <div>
+      <label for="status">Status:</label>
+      <select id="status" [(ngModel)]="pedido.status" name="status" required>
+        <option value="Novo">Novo</option>
+        <option value="Processando">Processando</option>
+        <option value="Finalizado">Finalizado</option>
+      </select>
+    </div>
+
+    <button type="submit">Salvar Pedido</button>
+  </form>
+  <app-selecionar-produto
+    *ngIf="mostrarModalProduto"
+    [produtos]="produtos"
+    (selecionado)="produtoSelecionado($event)"
+    (fecharModal)="fecharModalProduto()"
+  >
+  </app-selecionar-produto>
+</div>
